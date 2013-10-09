@@ -10,6 +10,8 @@
   <dd><%= @page.text %></dd>
   <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
   <dd><%= @page.category_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @page.user.email if @page.user_id? %></dd>
   <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
   <dd><%= @page.image %></dd>
 </dl>
