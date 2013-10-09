@@ -73,14 +73,16 @@
               <% end %>
             </ul>
           </div><!--/.well -->
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">You are logged in as:</li>
-              <li><%= current_user.email %></li>
-              <li<% if current_page('user') %> class="active"<% end %>><%= link_to "Edit profile", "/me" %></li>
-              <li><%= link_to "Logout", "/logout" %></li>
-            </ul>
-          </div><!--/.well -->
+          <% if user_signed_in? %>
+            <div class="well sidebar-nav">
+              <ul class="nav nav-list">
+                <li class="nav-header">You are logged in as:</li>
+                <li><%= current_user.email %></li>
+                <li<% if current_page('user') %> class="active"<% end %>><%= link_to "Edit profile", "/me" %></li>
+                <li><%= link_to "Logout", "/logout" %></li>
+              </ul>
+            </div><!--/.well -->
+          <% end %>
         </div><!--/span-->
         <div class="span9">
           <%= bootstrap_flash %>
