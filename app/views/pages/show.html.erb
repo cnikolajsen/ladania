@@ -1,13 +1,14 @@
 <%- model_class = Page -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= @page.title %> <small><%= @page.category.title %></small></h1>
 </div>
 
+<%
+  m =  @page.text.scan(/\b\S*\b/).map{|s|s}
+  Page.where(:title => m).each{|o| @page.text.gsub!("#{o.title}", "#{link_to o.title, page_path(o.id)}")}
+%>
+<p><%= @page.text.html_safe %></p>
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @page.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:text) %>:</strong></dt>
-  <dd><%= @page.text %></dd>
   <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
   <dd><%= @page.category_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>

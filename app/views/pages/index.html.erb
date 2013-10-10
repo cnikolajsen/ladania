@@ -5,24 +5,24 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:text) %></th>
       <th><%= model_class.human_attribute_name(:category_id) %></th>
-      <th><%= model_class.human_attribute_name(:image) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @pages.each do |page| %>
+      <%
+        m =  page.text.scan(/\b\S*\b/).map{|s|s}
+        Page.where(:title => m).each{|o| page.text.gsub!("#{o.title}", "#{link_to o.title, page_path(o.id)}")}
+      %>
       <tr>
-        <td><%= link_to page.id, page_path(page) %></td>
-        <td><%= page.title %></td>
-        <td><%= page.text %></td>
-        <td><%= page.category_id %></td>
-        <td><%= page.image %></td>
-        <td><%=l page.created_at %></td>
+        <td><%= link_to page.title, page_path(page) %></td>
+        <td><%= page.text.html_safe %></td>
+        <td><%= page.category.title %></td>
+        <td><%= page.user.email if page.user_id? %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_page_path(page), :class => 'btn btn-mini' %>
