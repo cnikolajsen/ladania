@@ -9,7 +9,7 @@ gem 'bootstrap-wysihtml5-rails', :require => 'bootstrap-wysihtml5-rails', :git =
 gem "therubyracer", "~> 0.12.0"
 gem 'thin'
 gem 'carrierwave'
-gem "rmagick"
+gem "rmagick", "2.12.0", :require => 'RMagick'
 #gem "bcrypt-ruby", :require => "bcrypt"
 
 group :development, :test do
