@@ -1,8 +1,9 @@
 source 'http://rubygems.org'
 ruby '2.0.0'
 
-gem 'rails', '3.2.12'
+gem 'rails', '4.0.0'
 
+gem 'protected_attributes'
 gem 'devise'
 gem "less-rails", "~> 2.4.2"
 gem 'twitter-bootstrap-rails', '2.2.8'
@@ -10,32 +11,51 @@ gem 'bootstrap-wysihtml5-rails', :require => 'bootstrap-wysihtml5-rails', :git =
 gem "therubyracer", "~> 0.12.0"
 gem 'thin'
 gem 'carrierwave'
-gem "rmagick"
+#gem "rmagick"
 #gem "bcrypt-ruby", :require => "bcrypt"
 
-group :development, :test do
-  gem 'sqlite3'
-  gem 'quiet_assets', :group => :development
-end
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3', group: [:development, :test]
+gem 'quiet_assets', group: [:development, :test]
+# Use PostgreSQL for production.
+gem 'pg', group: [:production, :staging]
 
-group :production, :staging do
-  gem "pg"
-end
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
 
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-end
-
+# Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# To use debugger
-# gem 'debugger'
+gem "friendly_id", "~> 5.0.1"
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
+
+# Use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Use Capistrano for deployment
+# gem 'capistrano', group: :development
+
+# Use debugger
+# gem 'debugger', group: [:development, :test]

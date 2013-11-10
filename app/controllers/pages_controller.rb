@@ -18,7 +18,11 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {
+        #if request.path != page_path(@page)
+        #  redirect_to @page, status: :moved_permanently
+        #end
+      }
       format.json { render json: @page }
     end
   end

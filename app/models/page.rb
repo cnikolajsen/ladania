@@ -1,6 +1,9 @@
 class Page < ActiveRecord::Base
+  #extend FriendlyId
+  #friendly_id :title, use: :slugged
+
   mount_uploader :image, ImageUploader
-  attr_accessible :category_id, :image, :text, :title
+  attr_accessible :category_id, :image, :text, :title, :user_id
   
   validates :title, :presence => true
   validates :category_id, :presence => true

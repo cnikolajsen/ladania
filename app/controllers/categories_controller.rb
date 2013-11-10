@@ -18,7 +18,11 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {
+        if request.path != category_path(@category)
+          redirect_to @category, status: :moved_permanently
+        end
+      }
       format.json { render json: @category }
     end
   end
